@@ -1,42 +1,57 @@
 package org.example;
 
+import java.util.Random;
+
 public class Carte {
 
     private static String[] couleurs = {"Trèfle","Carreau","Coeur","Pique"};
     private static String[] valeurs = {"2","3","4","5","6","7","8","9","10", "Valet", "Dame", "Roi", "As"}; //dans l'ordre de valeur, de la plus basse à la plus haute
 
     private String couleur;
-    private int valeur; //indice de valeurs[]
+    private int indiceValeur; //indice du tableau valeurs[]
 
     public Carte(String c, int v) {
         this.couleur = c;
-        this.valeur = v;
+        this.indiceValeur = v;
     }
 
-    public Carte() {}
+    //Constructeur par défaut pour créer une carte aléatoire
+    public Carte() {
+        Random random = new Random();
+        this.couleur = couleurs[random.nextInt(couleurs.length)];
+        this.indiceValeur = random.nextInt(valeurs.length);
+    }
 
     public int compare (Carte c) {
-        return Integer.compare(this.valeur, c.valeur);
+        return Integer.compare(this.indiceValeur, c.indiceValeur);
     }
 
     public String getCouleur() {
         return this.couleur;
     }
 
-    public String setCouleur(String couleur) {
-        return this.couleur = couleur;
+    public void setCouleurs(String couleur) {
+        this.couleur = couleur;
     }
 
     public String getValeur() {
-        return valeurs[this.valeur];
+        return valeurs[this.indiceValeur];
     }
 
-    public void setValeur(int valeur) {
-        this.valeur = valeur;
+    public void setValeurs(int valeur) {
+        this.indiceValeur = valeur;
+    }
+
+    public static String[] getCouleurs() {
+        return couleurs;
+    }
+
+    public static String[] getValeurs() {
+        return valeurs;
     }
 
     public String toString(){
-        return ("("+this.getCouleur()+","+this.getValeur()+")");
+        return ("("+this.couleur +","+this.getValeur()+")");
     }
 
 }
